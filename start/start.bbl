@@ -1,0 +1,56 @@
+\begin{thebibliography}{14}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{{Alard} \& {Lupton}(1998)}]{AlardLupton:98}
+{Alard}, C., \& {Lupton}, R.~H. 1998, \apj, 503, 325
+
+\bibitem[{{Baltz} \& {Silk}(2000)}]{BaltzSilk:00}
+{Baltz}, E.~A., \& {Silk}, J. 2000, \apj, 530, 578
+
+\bibitem[{{Capela} {et~al.}(2013){Capela}, {Pshirkov}, \&
+  {Tinyakov}}]{Capelaetal:13b}
+{Capela}, F., {Pshirkov}, M., \& {Tinyakov}, P. 2013, \prd, 87, 123524
+
+\bibitem[{{Carr} {et~al.}(2010){Carr}, {Kohri}, {Sendouda}, \&
+  {Yokoyama}}]{Carretal:10}
+{Carr}, B.~J., {Kohri}, K., {Sendouda}, Y., \& {Yokoyama}, J. 2010, \prd, 81,
+  104019
+
+\bibitem[{{Geehan} {et~al.}(2006){Geehan}, {Fardal}, {Babul}, \&
+  {Guhathakurta}}]{Geehanetal:06}
+{Geehan}, J.~J., {Fardal}, M.~A., {Babul}, A., \& {Guhathakurta}, P. 2006,
+  \mnras, 366, 996
+
+\bibitem[{{Gould}(1996)}]{Gould:96}
+{Gould}, A. 1996, \apj, 470, 201
+
+\bibitem[{{Griest} {et~al.}(1991){Griest}, {Alcock}, {Axelrod}, {Bennett},
+  {Cook}, {Freeman}, {Park}, {Perlmutter}, {Peterson}, {Quinn}, {Rodgers},
+  {Stubbs}, \& {MACHO Collaboration}}]{Griestetal:91}
+{Griest}, K., {et~al.} 1991, \apjl, 372, L79
+
+\bibitem[{{Hawking}(1974)}]{Hawking:74}
+{Hawking}, S.~W. 1974, \nat, 248, 30
+
+\bibitem[{{Klypin} {et~al.}(2002){Klypin}, {Zhao}, \&
+  {Somerville}}]{Klypinetal:02}
+{Klypin}, A., {Zhao}, H., \& {Somerville}, R.~S. 2002, \apj, 573, 597
+
+\bibitem[{{Kurucz}(1993)}]{Kurucz:93}
+{Kurucz}, R.~L. 1993, VizieR Online Data Catalog, 6039
+
+\bibitem[{{Mamon} \& {Soneira}(1982)}]{MamonSoneira:82}
+{Mamon}, G.~A., \& {Soneira}, R.~M. 1982, \apj, 255, 181
+
+\bibitem[{{Nesti} \& {Salucci}(2013)}]{NestiSalucci:13}
+{Nesti}, F., \& {Salucci}, P. 2013, \jcap, 7, 016
+
+\bibitem[{{Riffeser} {et~al.}(2006){Riffeser}, {Fliri}, {Seitz}, \&
+  {Bender}}]{Riffeseretal:06}
+{Riffeser}, A., {Fliri}, J., {Seitz}, S., \& {Bender}, R. 2006, \apjs, 163, 225
+
+\bibitem[{{Riffeser} {et~al.}(2008){Riffeser}, {Seitz}, \&
+  {Bender}}]{Riffeseretal:08}
+{Riffeser}, A., {Seitz}, S., \& {Bender}, R. 2008, \apj, 684, 1093
+
+\end{thebibliography}

@@ -1,0 +1,43 @@
+This is e-pTeX, Version 3.1415926-p3.2-110415-2.3 (utf8.euc) (TeX Live 2011) (format=platex 2011.7.3)  6 FEB 2016 08:57
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**refs.bib
+(./refs.bib
+pLaTeX2e <2006/11/10> (based on LaTeX2e <2009/09/24> patch level 0)
+Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, af
+rikaans, arabic, basque, bulgarian, catalan, pinyin, croatian, czech, danish, d
+utch, ukenglish, usenglishmax, esperanto, estonian, farsi, finnish, french, gal
+ician, german, ngerman, swissgerman, hungarian, icelandic, indonesian, interlin
+gua, irish, italian, kurmanji, latin, latvian, lithuanian, mongolian, mongolian
+lmc, bokmal, nynorsk, polish, portuguese, romanian, russian, serbian, serbianc,
+ slovak, slovenian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian
+, welsh, ancientgreek, ibycus, monogreek, greek, coptic, loaded.
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.4 @
+     ARTICLE{AlardLupton:98,
+? 
+! Emergency stop.
+ ...                                              
+                                                  
+l.4 @
+     ARTICLE{AlardLupton:98,
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+ 
+Here is how much of TeX's memory you used:
+ 6 strings out of 494163
+ 167 string characters out of 3160587
+ 51010 words of memory out of 3000000
+ 3494 multiletter control sequences out of 15000+200000
+ 7519 words of font info for 31 fonts, out of 3000000 for 9000
+ 745 hyphenation exceptions out of 8191
+ 5i,0n,4p,35b,14s stack positions out of 5000i,500n,10000p,200000b,50000s
+No pages of output.
