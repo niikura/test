@@ -273,6 +273,7 @@ Next we describe another parameter to represent the amplitude of light curve. In
 %
 \begin{eqnarray}
 \Delta F_{\rm max}=F_0\left(\frac{\beta^2+2}{\beta\sqrt{\beta^2+4}}-1\right)
+\label{eq:diffmicro}
 \end{eqnarray}
 %
 where $\Delta F$ represents the excess flux due to microlensing effect. Following the image difference technique we can set the detection threshold flux $\Delta F_{\rm det}$ as: 
@@ -480,21 +481,116 @@ we search, from the host sample of candidates, for microlensing events due to pr
 In this section, we describe our selection criterion for microlensing events with HSC-M31 data. 
 Basically we applied the same selection criterion as we imposed in simulation: 
 noise threshold and fitting condition. 
-We select candidates by fitting theoretical microlensing light curve with our database, 
-with errorbars from PSF photometry. 
-Here we take the base magnitude 
-As for the $176$ candidates in targeting field of patch=2,6, for example, we have no candidate 
-to have best-fitting parameters by successful fitting. 
-
-There are some candidates which can pass the fitting conditions. 
-For example, the light curve of moving object, the third figure in left law of Fig.~\ref{fig:cando} 
-can be fitted by microlensing light curve. 
-As we have no criterion to clearly exclude such candidates, 
-for now we just exclude them by comparing with image or eye-ball selections. 
 
 
 \subsection{Selection Criteria Statistics}
 (naive explanation, how many events are rejected by each criteria)
+
+We picked up significant points on the difference images, 
+and choose 11,462 candidates by the number of detection. 
+From these data we searched for microlensing candidates by imposing selection conditions in the following. 
+
+The data we use consists of the reported time of each flux measurement (time), 
+the photometric flux in the difference image, and the flux error. 
+
+(In Kepler analysis they divide good fluxes by mean flux of the lightcurve 
+which is calculated over 300 data points towards the center of the lightcurve, 
+and subtract unity from this quantity to produce a fractional magnification lightcurve.)
+
+
+The statistics and selection criteria are as follows:
+%
+\begin{itemize}
+%
+\item{fitting theoretical microlensing light curve}\\
+Fitting theoretical microlensing light curve with counts in difference images, using errorbars from PSF photometry. 
+Theoretical lightcurves in difference image can be described as:
+%
+\begin{equation}
+\Delta F (t)= F_0 (A(t) - A(t_\mathrm{Ref}))
+\label{eq:chi2dof}
+\end{equation}
+%
+where $F_0$ is the constant parameter representing flux of the source star, 
+$A(t)$ is the theoretical magnification, and  
+$t_\mathrm{Ref}$ is the time around when 10 images for the reference image are taken. 
+Theoretical microlensing light curve can be described %by Eq.~\ref{eq:diffmicro}, 
+with three free parameters: $\beta$, $t_\mathrm{FWHM}$ (or $t_E$), and $F_0$,
+and fixed parameter $t_\mathrm{max}$ from peak position. 
+Free parameters can move in range $0<\beta<1$, $t_\mathrm{FWHM}<25000$sec, 
+$0.5 \times (F_\mathrm{max}-F_\mathrm{base})/(A(u_\mathrm{min})-1)<1.5\times (F_\mathrm{max}-F_\mathrm{base})$ 
+(the last parameter can be fixed), 
+where we take $F_\mathrm{max}$ as $97.6\%$ percentile, and $F_\mathrm{base}$ as $15\%$ percentile of the time-variation flux. 
+
+\item{fitting theoretical flare light curve}\\
+In the same way as in microlensing lightcurves, magnification due to flare events can be described as
+%
+\begin{eqnarray}
+A (t;B,C)=\left\{\begin{array}{ll}
+ B \exp\left(-\frac{C (t-t_\mathrm{max})}{t_\mathrm{obsperiod}}\right) & (t>t_\mathrm{max})\\
+ 0  & (t<t_\mathrm{max})\\
+\end{array}\right.
+\label{eq:expflare}
+\end{eqnarray}
+%
+Therefore free parameters are $B$ and $C$ so that $\Delta F (t)= A(t) - A(t_\mathrm{Ref})$, %(and baseline factor $BF$ so that $\Delta F (t)= A(t) - A(t_\mathrm{Ref})*BF$), 
+and fixed parameter $t_\mathrm{max}$ from peak position. 
+Free parameters can move in range $0.95<B<100$ and $C<1000$.  
+%(and $0.5 <BF/(F_\mathrm{max}-F_\mathrm{base})<1.5$). 
+
+
+\end{itemize}
+
+
+
+%select those which have the best-fitting parameters by successful fitting. 
+
+There exist some candidates which can pass the fitting conditions. 
+As we have no criterion to clearly exclude such candidates, 
+for now we just exclude them by comparing with image or eye-ball selections. 
+
+
+
+\begin{table*}[t]%htbp[H]
+\label{tab:selecond}
+    \caption{Selection criteria}
+    \begin{center}
+   \begin{tabular}{ll}
+      \hline %\hline
+   \multicolumn{1}{l}{Statistic}&\multicolumn{1}{l}{Definition}\\
+ \hline 
+mlchi2dof & $\chi^2$ of fit to microlensing shape (divided by dof in Kepler's case)\\
+fchi2dof & $\chi^2$ of fit to exponential flare shape (divided by dof in Kepler's case)\\ 
+  \hline
+  \hline
+   \multicolumn{1}{l}{Selection Criterion}&\multicolumn{1}{l}{Purpose}\\
+ \hline 
+edgecriterion & remove bumps due to poor photometry\\
+mlchi2dof$<0.75$ fchi2dof & microlensing fit better than flare fit\\
+mlchi2dof$<$ ?? & microlensing fit is not too bad\\
+asymmetry & remove short duration flare events\\
+ \hline 
+ \hline 
+   \multicolumn{1}{l}{Statistic ($*$)}&\multicolumn{1}{l}{Definition}\\
+ \hline 
+$\langle f\rangle$ & average of $f_i$ over all good measurements in lightcurve\\
+$A_i$ & flux$_i / \langle$flux$\rangle$\\
+ \hline 
+ \hline 
+   \multicolumn{1}{l}{Selection Criterion ($*$)}&\multicolumn{1}{l}{Purpose}\\
+ \hline 
+edgecriterion & remove bumps due to poor photometry\\
+ \hline 
+   \label{table:counta}
+  	\end{tabular}
+	%\hspace{1 em}
+	%\begin{tablenotes}
+	%   \item {
+         \tablecomments{\small ($*$) is only applied to Kepler's data }
+	%\end{tablenotes}
+	   \end{center}
+   \end{table*}
+%
 
 \subsection{Background}
 \subsubsection{Foreground Moving Objects in the M31 field-3}
@@ -685,7 +781,7 @@ one with simulated light curves, and the other with embedded candidates in the i
 	Fig.~\ref{fig:efficiencyeach} describes the detection efficiency for events with different 
 	timescale and source magnitudes. 
 	There exist drastic drops of detection efficiencies for events longer than the observational period, longer than 7 hours. 
-	one reason for this effect is that fitting by theoretical microlensing light curve does not work for these events because of unstable baseline. 
+	One reason for this effect is that fitting by theoretical microlensing light curve does not work for these events because of unstable baseline. 
 	For events with time scale shorter than observational period, 
 	the detection efficiencies are almost constant for stars brighter than $23$ magnitude. 
 	On the other hand, when the source stars fainter than $24$ magnitude have lower detection efficiency, which indicates that 
@@ -842,7 +938,7 @@ compared to halo region.
 %
 
 
-\begin{table}[t]%htbp[H]
+\begin{table*}[t]%htbp[H]
     \caption{Properties of flux count and star number counts for sub-regions of HSC-M31\label{tab:m31-table}}
     \begin{center}
    \begin{tabular}{lcccccc}
@@ -858,17 +954,18 @@ Bulge &4,4  &$5.91\times10^6$ &$1.24\times10^6$ &$2.32\times10^6$& 124096 & 4690
   \hline
    \label{table:counta}
   	\end{tabular}
-	\hspace{1 em}
-	\begin{tablenotes}
-	   \item {\small {\it Note:} Total pixel count property in different regions; M31-halo region (patch=1,5), 
+	%\hspace{1 em}
+	%\begin{tablenotes}
+	%   \item {
+         \tablecomments{\small {\it Note:} Total pixel count property in different regions; M31-halo region (patch=1,5), 
 halo-disk region corresponding to the targeting field in this section (patch=2,6), 
 disk region (patch=3,8),  
 and bulge region (patch=4,4). 	   
 The total PSF count of the targeting region (patch=2,6) derived from peaks 
 	   is in the same order as total pixel count of that image. }
-	\end{tablenotes}
+	%\end{tablenotes}
 	   \end{center}
-   \end{table}
+   \end{table*}
 %
 Note that there exists a conventional way to correct the field magnitude 
 by combining extinction map and empirical luminosity function. 

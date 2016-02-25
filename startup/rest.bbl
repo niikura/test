@@ -1,0 +1,22 @@
+\begin{thebibliography}{5}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{{Henry} \& {Newsom}(1996)}]{HenryNewsom:96}
+{Henry}, G.~W., \& {Newsom}, M.~S. 1996, \pasp, 108, 242
+
+\bibitem[{{Kodric} {et~al.}(2013){Kodric}, {Riffeser}, {Hopp}, {Seitz},
+  {Koppenhoefer}, {Bender}, {Goessl}, {Snigula}, {Lee}, {Ngeow}, {Chambers},
+  {Magnier}, {Price}, {Burgett}, {Hodapp}, {Kaiser}, \&
+  {Kudritzki}}]{Kodricetal:13}
+{Kodric}, M., {et~al.} 2013, \aj, 145, 106
+
+\bibitem[{{Kurucz}(1993)}]{Kurucz:93}
+{Kurucz}, R.~L. 1993, VizieR Online Data Catalog, 6039
+
+\bibitem[{{Lacy} {et~al.}(1976){Lacy}, {Moffett}, \& {Evans}}]{Lacyetal:76}
+{Lacy}, C.~H., {Moffett}, T.~J., \& {Evans}, D.~S. 1976, \apjs, 30, 85
+
+\bibitem[{{Moffett}(1974)}]{Moffett:74}
+{Moffett}, T.~J. 1974, \apjs, 29, 1
+
+\end{thebibliography}
