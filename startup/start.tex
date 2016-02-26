@@ -559,27 +559,45 @@ for now we just exclude them by comparing with image or eye-ball selections.
       \hline %\hline
    \multicolumn{1}{l}{Statistic}&\multicolumn{1}{l}{Definition}\\
  \hline 
+dof & number of data points within 5 bumplen of peak minus number of fit parameters\\
 mlchi2dof & $\chi^2$ of fit to microlensing shape (divided by dof in Kepler's case)\\
 fchi2dof & $\chi^2$ of fit to exponential flare shape (divided by dof in Kepler's case)\\ 
+asymmetry & $\Sigma_{N_\mathrm{asy} points} [A(t_0-t_i)-A(t_0+t_i)]/[\Sigma A(t_i)-N_\mathrm{asy}A_\mathrm{min}]$\\
   \hline
   \hline
    \multicolumn{1}{l}{Selection Criterion}&\multicolumn{1}{l}{Purpose}\\
  \hline 
 edgecriterion & remove bumps due to poor photometry\\
 mlchi2dof$<0.75$ fchi2dof & microlensing fit better than flare fit\\
-mlchi2dof$<$ ?? & microlensing fit is not too bad\\
-asymmetry & remove short duration flare events\\
+mlchi2dof ($<3.5$) & microlensing fit is not too bad\\
+asymmetry ($<0.17$) & remove short duration flare events\\
  \hline 
  \hline 
    \multicolumn{1}{l}{Statistic ($*$)}&\multicolumn{1}{l}{Definition}\\
  \hline 
 $\langle f\rangle$ & average of $f_i$ over all good measurements in lightcurve\\
 $A_i$ & flux$_i / \langle$flux$\rangle$\\
+$\sigma_i$ & reported error of flux normalized by average flux\\
+bump & sequence of 4 or more contiguous fluxes with $A_i-1 \geq 3\sigma$\\
+nbump & number of bumps in lightcurve\\
+bumplen & number of contiguous flares with $A_i-1 \geq 3\sigma$\\
+laglautocorr & $\frac{1}{N}\Sigma^{i=N}_{i=1}[(A_i-1)(A_{i+1}-1)]$, correlation between two fluxes\\
+bumpvar & $\Sigma [A_i-1]\sigma_i$, over points under bump\\
+leftedgevar & $\Sigma [A_i-1]\sigma_i$, over 2 bumplen points starting 6 bumplen before bump\\
+rightedgevar & $\Sigma [A_i-1]\sigma_i$, over 2 bumplen points starting 4 bumplen after bump\\
+chi2in &  $\chi^2$ of microlensing fit for points with time, $t_i$ such that $t_0-1.5\hat t <t_i <t_0+1.5\hat t$ (event duration time)\\
+chi2out &  $\chi^2$ of microlensing fit for points with time, $t_i$ such that $t_0-6\hat t <t_i <t_0+6\hat t$, but not in chi2in\\
+$N_\mathrm{asy}$ & number of points near peak time, $t_0$, for asymmetry; larger of 1.5$\lambda$ (exp. decay constant) and $2\hat t$\\
  \hline 
  \hline 
    \multicolumn{1}{l}{Selection Criterion ($*$)}&\multicolumn{1}{l}{Purpose}\\
  \hline 
-edgecriterion & remove bumps due to poor photometry\\
+$0<$nbump$<3$ & remove variable stars and stars with no transient\\
+bumplen$\geq 4$ & level 1 trigger (significant bump)\\
+bumplen$\geq 5$ & remove short duration flare events\\
+lag1autocorr$>0.7$ & remove obvious variable stars\\
+bumpvar$>\frac{1}{2}5.5$ (leftedgevar+rightedgevar) & signal to noise cut when reported errors are non-Gaussian\\
+chi2in/chi2out$<4$ & remove events where $\chi^2_\mathrm{dof}$ under peak is much worse than $\chi^2_\mathrm{dof}$ outside peak area\\
  \hline 
    \label{table:counta}
   	\end{tabular}
