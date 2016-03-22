@@ -1,4 +1,4 @@
-\begin{thebibliography}{5}
+\begin{thebibliography}{6}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Henry} \& {Newsom}(1996)}]{HenryNewsom:96}
@@ -18,5 +18,9 @@
 
 \bibitem[{{Moffett}(1974)}]{Moffett:74}
 {Moffett}, T.~J. 1974, \apjs, 29, 1
+
+\bibitem[{{Riffeser} {et~al.}(2008){Riffeser}, {Seitz}, \&
+  {Bender}}]{Riffeseretal:08}
+{Riffeser}, A., {Seitz}, S., \& {Bender}, R. 2008, \apj, 684, 1093
 
 \end{thebibliography}

@@ -560,24 +560,31 @@ for now we just exclude them by comparing with image or eye-ball selections.
    \multicolumn{1}{l}{Statistic}&\multicolumn{1}{l}{Definition}\\
  \hline 
 dof & number of data points within 5 bumplen of peak minus number of fit parameters\\
-mlchi2dof & $\chi^2$ of fit to microlensing shape (divided by dof in Kepler's case)\\
-fchi2dof & $\chi^2$ of fit to exponential flare shape (divided by dof in Kepler's case)\\ 
+$A_i$ & flux$_i / \langle$flux$\rangle$\\
+$\sigma_i$ & reported error of flux normalized by average flux\\
+mlchi2dof & $\chi^2$ of fit to microlensing shape divided by dof \\
+fchi2dof & $\chi^2$ of fit to exponential flare shape divided by dof \\ 
 asymmetry & $\Sigma_{N_\mathrm{asy} points} [A(t_0-t_i)-A(t_0+t_i)]/[\Sigma A(t_i)-N_\mathrm{asy}A_\mathrm{min}]$\\
+$N_\mathrm{asy}$ & number of points near peak time, $t_0$, for asymmetry; larger of 1.5$\lambda$ (exp. decay constant) and $2\hat t$\\
+see-ccorr & cross correlation with seeing\\
+see-varcorr & variation of cross correlations of all events\\
+boxvar &  sum of flux count within a circle with a radius of 5 pixels \\
+sideboxcount &  sum of flux count within a $41\times41$ box subtracted by boxvar\\
   \hline
   \hline
    \multicolumn{1}{l}{Selection Criterion}&\multicolumn{1}{l}{Purpose}\\
  \hline 
-edgecriterion & remove bumps due to poor photometry\\
-mlchi2dof$<0.75$ fchi2dof & microlensing fit better than flare fit\\
+edgecriterion & remove bumps due to poor photometry (less than five pixels)\\
+mlchi2dof$<0.75$ fchi2dof & microlensing fit better than flare fit (not necessary?)\\
 mlchi2dof ($<3.5$) & microlensing fit is not too bad\\
 asymmetry ($<0.17$) & remove short duration flare events\\
+(*) see-ccorr ($<$see-varcorr) & events correlated with the time-variation of seeing\\
+(*) sideboxcount ($<$boxvar) & remove events due to spikes\\
  \hline 
  \hline 
    \multicolumn{1}{l}{Statistic ($*$)}&\multicolumn{1}{l}{Definition}\\
  \hline 
 $\langle f\rangle$ & average of $f_i$ over all good measurements in lightcurve\\
-$A_i$ & flux$_i / \langle$flux$\rangle$\\
-$\sigma_i$ & reported error of flux normalized by average flux\\
 bump & sequence of 4 or more contiguous fluxes with $A_i-1 \geq 3\sigma$\\
 nbump & number of bumps in lightcurve\\
 bumplen & number of contiguous flares with $A_i-1 \geq 3\sigma$\\
@@ -587,7 +594,6 @@ leftedgevar & $\Sigma [A_i-1]\sigma_i$, over 2 bumplen points starting 6 bumplen
 rightedgevar & $\Sigma [A_i-1]\sigma_i$, over 2 bumplen points starting 4 bumplen after bump\\
 chi2in &  $\chi^2$ of microlensing fit for points with time, $t_i$ such that $t_0-1.5\hat t <t_i <t_0+1.5\hat t$ (event duration time)\\
 chi2out &  $\chi^2$ of microlensing fit for points with time, $t_i$ such that $t_0-6\hat t <t_i <t_0+6\hat t$, but not in chi2in\\
-$N_\mathrm{asy}$ & number of points near peak time, $t_0$, for asymmetry; larger of 1.5$\lambda$ (exp. decay constant) and $2\hat t$\\
  \hline 
  \hline 
    \multicolumn{1}{l}{Selection Criterion ($*$)}&\multicolumn{1}{l}{Purpose}\\
