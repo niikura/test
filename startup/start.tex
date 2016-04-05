@@ -522,8 +522,8 @@ Also the candidates categorized in the third group are likely to be fakes becaus
 \label{sec:res2}
 %explain each selection criteria about shape characteristics of light curves (summary in table(s))
 After an identification of secure time-variable stars and their light curve measurements, 
-we search, from the host sample of candidates, for microlensing events due to primordial black holes that might exist in the halo regions of MW and M31. 
-
+we search, from the host sample of candidates, for microlensing events 
+due to primordial black holes that might exist in the halo regions of MW and M31. 
 
 In this section, we describe our selection criterion for microlensing events with HSC-M31 data. 
 Basically we applied the same selection criterion as we imposed in simulation: 
@@ -531,27 +531,101 @@ noise threshold and fitting condition.
 
 
 \subsection{Selection Criteria Statistics}
-(naive explanation, how many events are rejected by each criteria)
+%(naive explanation, how many events are rejected by each criteria)
 
-We picked up significant points on the difference images, 
-and choose 11,462 candidates by the number of detection. 
-From these data we searched for microlensing candidates by imposing selection conditions in the following. 
 
+We picked up significant points on the difference images of 10-minute cadence, 
+and choose 11,462 candidates by the number of detection. %, detected more than twice
 The data we use consists of the reported time of each flux measurement (time), 
-the photometric flux in the difference image, and the flux error. 
+the photometric flux in the difference image, and the flux error 
+over 190 data points. 
+From these data we searched for microlensing candidates by imposing selection conditions in the following. 
+%The statistics and selection criteria are as follows:
 
-(In Kepler analysis they divide good fluxes by mean flux of the lightcurve 
-which is calculated over 300 data points towards the center of the lightcurve, 
-and subtract unity from this quantity to produce a fractional magnification lightcurve.)
+%(In Kepler analysis they divide good fluxes by mean flux of the lightcurve which is calculated over 300 data points towards the center of the lightcurve, and subtract unity from this quantity to produce a fractional magnification lightcurve.)
 
 
-The statistics and selection criteria are as follows:
+
+
+\begin{comment}
+
+(autocorrelationの条件は入れた方がよいのか?--->  短時間なので今日は大丈夫そう)
+
+まずは変光天体の候補を抽出する
+3枚足した画像、差分画像を作成し、2回以上検出されたイベントを変光イベントのcandidateとする。
+ここからマイクロレンズの候補イベントを抽出する。
+
+#ここからまずマイクロレンズでフィッティングする。
+各イベントに対してマイクロレンズのライトカーブでフィッティングする。
+今回は対象としているPBHの質量が小さいので、補正なしの式を用いる。
+イベントレート的に1回程度なので、7時間の観測のライトカーブで一番大きなピークの時刻をピーク時刻とする。
+microlensingのパラメータは4つで、t0 (ピークの時刻-sourcelensが最も近い時)、^t (the duration of the event)、Amax (the peak magnification)、rho_min (the distance of closest approach between lens and source lines-of-sights divided by the stellar radius in the lens plane)
+0<beta<2、timescale 0<t<25000secでパラメータがでてこなかったものはreject. 
+パラメータはでてくるが、カイ二乗が悪すぎるものがるので、それを切り捨てる。
+かなりの数が切り捨てられる。
+
+ここまでで、ピークがあるイベントがのこる。まずはfakeをとりのぞく。
+
+#CCD edgeによる増光
+まずfakeなイベントを取り除く
+増光ピークを持つイベントのうち、CCDedge付近は測光がうまくいかない。
+CCDの座標を元に、端から5pixel以内に近づく事があるイベントをbad eventsとしてとりのぞく。
+いくらか切り捨てられる。
+
+#spikeによる増光。
+測光できないbad eventsやfake eventsをreject。
+多くはspikeで、近傍の星からのoutliers?が重なることによる増光が原因。
+差分画像上で41pixel四方から、中心付近5pixelのカウント値を引き算して、
+中央以外のカウント値が平均分散よりも大きい場合はrejectする。
+
+#その他のdefect (さいご?)
+他にも、CCD defectや画像のstripeがfakeイベントとして検出される。
+これらはカウントを等級に直すと突発的に現れるケース。取り除いてあげる。
+#小惑星もあったけれども、同様にとりのぞいてしまいました。
+移動の軌跡が見えてしまうことを利用出来ないか? (bumpのvariabilityのlocal measurement..?CCD edgeの軌跡と酷似しているもの。)
+
+ここまでで最も大きなbumpのcategory(数百イベント): 
+
+
+ここまできて残ったイベントは(#あとはリアルっぽいイベントなので、分類。)
+
+#ちょっとした変光星との分類は
+多くはshort term variabilitydaga,
+周期長いイベントは端が切れてしまっている、ピークを持たないイベントはsimulationでも適用外であり、今回は考慮しない事にする。
+chi2in chi2outつかうとある程度除ける。 
+
+#seeingの相関。(いいのかな??)
+残ったイベントの傾向を見てみると、fittingが良いピークのうち、なだらかなものは多くは同じような時刻にピークを持つ。
+これはseeingのよい時刻と相関がありそう。相互相関をとって、強すぎるものはfakeとして取り除いた。
+
+
+#フレア非対称性。(フレアフィッティング。)
+かなり非対称なbump -> stellar atmosphere でのmagnetic activityによるstellar flareが考えられる。
+解決策: 4-5点の連続した点+1.5*flare timescale lambda or 2*^t でのasymmetry で、asymmetryが17%より小さいこと(+上のchi^2の条件から、short-durationも取り除ける)
+今回はサンプリングが十分と考えられるので、short duration eventについても取り除くことができた。
+(exponentialでfittingもしたが、short durationのイベントは特にうまくゆかなかったため、非対称性の条件だけで取り除くことにした)
+(flareのパラメータはt0 (ピークの時刻-sourcelensが最も近い時)、Amax (the peak amplitude)、lambda(exponential decay constant)
+立ち上がりは30分のうちどこかで起こると仮定。測定値が瞬時にpeakの測定値を超えるときは、平均peak fluxはbaselineとpeakの値の間の値を持つ。
+なので、flareにはもう1つパラメータ(peak timeをすぎてすぐのfluxの値)を加える。
+#flareをとりのぞく条件: mlchi2dof <  0. 75Å~fchi2dof )
+
+
+
+\end{comment}
+
+
 %
 \begin{itemize}
 %
-\item{fitting theoretical microlensing light curve}\\
-Fitting theoretical microlensing light curve with counts in difference images, using errorbars from PSF photometry. 
-Theoretical lightcurves in difference image can be described as:
+\item{Fitting of microlensing shape to lightcurves}\\
+Our 7-hour long data is expected to contain at most 
+one microlensing event from the expectation described in \S~\ref{sec:constraint}. 
+Owing to the two-minute cadence of dense data points, 
+application of theoretical shape to lightcurves can work as 
+strong selection criteria of microlensing events. 
+We applied expected microlensing shape for every transient candidate, 
+with flux counts in difference images, using errorbars from PSF photometry. 
+Theoretical lightcurves in difference image is given in the same way as in \citet{deJongetal:06}:
 %
 \begin{equation}
 \Delta F (t)= F_0 (A(t) - A(t_\mathrm{Ref}))
@@ -562,39 +636,154 @@ where $F_0$ is the constant parameter representing flux of the source star,
 $A(t)$ is the theoretical magnification, and  
 $t_\mathrm{Ref}$ is the time around when 10 images for the reference image are taken. 
 Theoretical microlensing light curve can be described %by Eq.~\ref{eq:diffmicro}, 
-with three free parameters: $\beta$, $t_\mathrm{FWHM}$ (or $t_E$), and $F_0$,
-and fixed parameter $t_\mathrm{max}$ from peak position. 
+with three free parameters: $\beta$ (the distance of closest approach between lens and source lines-of-sights divided by the stellar radius in the lens plane), $t_\mathrm{FWHM}$ (the duration of the event, or $t_E$?), and $F_0$ (the original flux of the star without magnification),
+and one fixed parameter $t_\mathrm{max}$ (the time of peak magnification). 
 Free parameters can move in range $0<\beta<1$, $t_\mathrm{FWHM}<25000$sec, 
-$0.5 \times (F_\mathrm{max}-F_\mathrm{base})/(A(u_\mathrm{min})-1)<1.5\times (F_\mathrm{max}-F_\mathrm{base})$ 
-(the last parameter can be fixed), 
+$0.5 \times (F_\mathrm{max}-F_\mathrm{base})/(A(u_\mathrm{min})-1)<1.5\times (F_\mathrm{max}-F_\mathrm{base})$, 
 where we take $F_\mathrm{max}$ as $97.6\%$ percentile, and $F_\mathrm{base}$ as $15\%$ percentile of the time-variation flux. 
+Note than one microlensing bump is expected, 
+we fix the $t_\mathrm{max}$ parameter at the time of the highest peak contained in the lightcurve, 
+which is selected as the time of the largest peak of consecutive ten points around $F_\mathrm{max}$.  
+The selection criteria is set with chi-squared per degree-of-freedom of the microlensing fit. 
+Note again that no corrections are applied for microlensing lightcurves 
+because of the very small Einstein radius of targeting lens PBHs compared to stellar MACHOs 
+and distant source stars at M31. 
+%Note that this process took a very long time, 
+We put two conditions concerting this microlensing fitting, and remove following events: 
+``bad-parameter candidates'', corresponding to those events which cannot be fitted withing the 
+region of $t_\mathrm{FWHM}<25000$sec. 
+The second one is from the ``bad-fitting candidates'', which has large chi-squared value 
+due to the worse fitting of the peak event. 
 
-\item{fitting theoretical flare light curve}\\
-In the same way as in microlensing lightcurves, magnification due to flare events can be described as
+\end{itemize}
+
+
+After applying these criteria we still have 
+peaky variable stars and noise bumps. 
+We applied the following selection criteria 
+in order to eliminate the probable fake events: 
+
+\begin{itemize}
+\item{Bad data close to CCD edge}\\
+Some remaining candidates are found in the positions close to CCD edges. 
+Every lightcurve for such candidates contains a peak flux when the 
+pixel gets close to CCD edge, which is due to incorrect photometry. 
+Even though our observation focused on the fixed target field, 
+the wrong focusing due to the crowded stars in M31 caused 
+the slight movement of stars in the CCD position,  
+which contributes to peak in the lightcurves. 
+We reject such bad events by removing candidates which get close 
+within five pixels from the CCD edges. 
+
+\item{Fake magnification due to spikes}\\
+There are many fake events with symmetric peaks but relatively 
+large errors of photometry around the peaks. 
+These candidates locate in the outskirts of nearby stars, and 
+affected by the bright spikes stretching from the large stars. 
+These spikes rotate during observation following the guidance of telescope, 
+and magnify neighboring stars when they overlap each other. 
+We remove these kinds of events using difference images at peak magnification: 
+by judging the event as spike if the flux within $41\times41$-pixel rectangle 
+around the candidate subtracted by the flux in a center circle of 5-pixel radius 
+is larger than the mean flux variance among the 37 images.  
+
+
+\item{CCD defects}\\%last condition?
+There also exist some lightcurves with peaks of sudden magnification, 
+which is detected at the positions without stellar sign. 
+Many of these bright peaks are caused by CCD defects, which give 
+brighter flux than the surrounding pisitions. 
+In the same way as of CCD edge, a fixed position in CCD time-variately 
+moves in the celestial coordinate due to incorrest focusing, which is 
+unique feature of our observation. 
+Thus in our dense cadence of survey, CCD fakes can be detected 
+by our selection criteria if the defects moves slow enough to 
+be detected at a fixed position. 
+These events can be removed from the unique feature of sudden magnifications of flux, 
+especially those events with background of negative flux. 
+(not good selection...? or we can also remove them by 
+the unique path of defects similar to the movement of CCD edge during our observation). 
+Note that this selection can also remove the magnification from asteroids, which 
+also causes similar feature of magnification 
+(unlike CCD edges asteroids moves in straight path, though). 
+
+\end{itemize}
+
+%We demand 
+
+
+%ここまでで最も大きなbumpのcategory(数百イベント): 
+After removing the fake events described above, we still have 
+more than 100 candidates containing bumps. 
+The remaining transient events are considered due to stellar contributions. 
+For secure selection of microlensing events we applied additional selection criteria as follows: 
+
+\begin{itemize}
+
+\item{Variable stars}\\%rejection by peak, short term variability data
+There are some lightcurves whose bumps are well fitted by microlensing events, but 
+shows relatively large deviation in the outskirts. 
+These events are considered as part of Cepheid variable stars, and mostly 
+does not contain peaks during our observation. 
+As we are now considering only events with peaks during observation, we eliminate events 
+without peaks during observation. 
+Also for events with peaks we can reject them by chi2in and chi2out selection. 
+
+
+\item{Correlation with time-vatiation of seeing}\\
+Most of the remaining events tend to have peaks around the same time, at $11,000$sec 
+from the beginning of our observation. 
+This is around the best time of seeing, and the shapes of lightcurves are seemed to be 
+relevant to the time-variation of seeing during our observation, which is very 
+unlikely due to microlensing events. 
+In order to remove these kinds of events we calculated cross-correlations of 
+lightcurves and time-variation of seeing, and reject the events with strong correlations. 
+
+\item{Flare events}\\
+After applying these criteria we still find around 30 events. 
+The timescale is different for different events, and 
+many of them contain highly asymmetric bumps in the lightcurves. 
+These characteristics are unique to stellar flares, sudden magnification and 
+exponential decay of stellar flux showing up as a consequence of 
+magnetic activities on the surface of stars. 
+We can distinguish these flare bumps from symmetric microlensing peaks 
+by using asymmetric statics. 
+Owing to the two-minute cadence of our data we can safely quantify the 
+asymmetric statics as in the Table. 
+(by utilizing sequential points around the peak in the length of 
+two times of timescale, and remove events whose asymmetric statics is smaller than 
+$17\%$. )
+
+
+%\item{Fitting theoretical flare light curve}\\
+%In the same way as in microlensing lightcurves, magnification due to flare events can be described as
 %
-\begin{eqnarray}
-A (t;B,C)=\left\{\begin{array}{ll}
- B \exp\left(-\frac{C (t-t_\mathrm{max})}{t_\mathrm{obsperiod}}\right) & (t>t_\mathrm{max})\\
- 0  & (t<t_\mathrm{max})\\
-\end{array}\right.
-\label{eq:expflare}
-\end{eqnarray}
+%\begin{eqnarray}
+%A (t;B,C)=\left\{\begin{array}{ll}
+% B \exp\left(-\frac{C (t-t_\mathrm{max})}{t_\mathrm{obsperiod}}\right) & (t>t_\mathrm{max})\\
+% 0  & (t<t_\mathrm{max})\\
+%\end{array}\right.
+%\label{eq:expflare}
+%\end{eqnarray}
 %
-Therefore free parameters are $B$ and $C$ so that $\Delta F (t)= A(t) - A(t_\mathrm{Ref})$, %(and baseline factor $BF$ so that $\Delta F (t)= A(t) - A(t_\mathrm{Ref})*BF$), 
-and fixed parameter $t_\mathrm{max}$ from peak position. 
-Free parameters can move in range $0.95<B<100$ and $C<1000$.  
+%Therefore free parameters are $B$ and $C$ so that $\Delta F (t)= A(t) - A(t_\mathrm{Ref})$, %(and baseline factor $BF$ so that $\Delta F (t)= A(t) - A(t_\mathrm{Ref})*BF$), 
+%and fixed parameter $t_\mathrm{max}$ from peak position. 
+%Free parameters can move in range $0.95<B<100$ and $C<1000$.  
 %(and $0.5 <BF/(F_\mathrm{max}-F_\mathrm{base})<1.5$). 
+%(flareのパラメータはt0 (ピークの時刻-sourcelensが最も近い時)、Amax (the peak amplitude)、lambda(exponential decay constant)
 
 
 \end{itemize}
 
 
-
+After removing the events no PBH microlensing candidates exists. 
 %select those which have the best-fitting parameters by successful fitting. 
 
-There exist some candidates which can pass the fitting conditions. 
-As we have no criterion to clearly exclude such candidates, 
-for now we just exclude them by comparing with image or eye-ball selections. 
+%There exist some candidates which can pass the fitting conditions. 
+%As we have no criterion to clearly exclude such candidates, 
+%for now we just exclude them by comparing with image or eye-ball selections. 
+
+
 
 
 
@@ -617,8 +806,10 @@ see-ccorr & cross correlation with seeing\\
 see-varcorr & variation of cross correlations of all events\\
 boxvar &  sum of flux count within a circle with a radius of 5 pixels \\
 sideboxcount &  sum of flux count within a $41\times41$ box subtracted by boxvar\\
+chi2in &  $\chi^2$ of microlensing fit for points with time, $t_i$ such that $t_0-1.5\hat t <t_i <t_0+1.5\hat t$ (event duration time)\\
+chi2out &  $\chi^2$ of microlensing fit for points with time, $t_i$ such that $t_0-6\hat t <t_i <t_0+6\hat t$, but not in chi2in\\
   \hline
-  \hline
+%  \hline
    \multicolumn{1}{l}{Selection Criterion}&\multicolumn{1}{l}{Purpose}\\
  \hline 
 edgecriterion & remove bumps due to poor photometry (less than five pixels)\\
@@ -627,46 +818,46 @@ mlchi2dof ($<3.5$) & microlensing fit is not too bad\\
 asymmetry ($<0.17$) & remove short duration flare events\\
 (*) see-ccorr ($<$see-varcorr) & events correlated with the time-variation of seeing\\
 (*) sideboxcount ($<$boxvar) & remove events due to spikes\\
- \hline 
- \hline 
-   \multicolumn{1}{l}{Statistic ($*$)}&\multicolumn{1}{l}{Definition}\\
- \hline 
-$\langle f\rangle$ & average of $f_i$ over all good measurements in lightcurve\\
-bump & sequence of 4 or more contiguous fluxes with $A_i-1 \geq 3\sigma$\\
-nbump & number of bumps in lightcurve\\
-bumplen & number of contiguous flares with $A_i-1 \geq 3\sigma$\\
-laglautocorr & $\frac{1}{N}\Sigma^{i=N}_{i=1}[(A_i-1)(A_{i+1}-1)]$, correlation between two fluxes\\
-bumpvar & $\Sigma [A_i-1]\sigma_i$, over points under bump\\
-leftedgevar & $\Sigma [A_i-1]\sigma_i$, over 2 bumplen points starting 6 bumplen before bump\\
-rightedgevar & $\Sigma [A_i-1]\sigma_i$, over 2 bumplen points starting 4 bumplen after bump\\
-chi2in &  $\chi^2$ of microlensing fit for points with time, $t_i$ such that $t_0-1.5\hat t <t_i <t_0+1.5\hat t$ (event duration time)\\
-chi2out &  $\chi^2$ of microlensing fit for points with time, $t_i$ such that $t_0-6\hat t <t_i <t_0+6\hat t$, but not in chi2in\\
- \hline 
- \hline 
-   \multicolumn{1}{l}{Selection Criterion ($*$)}&\multicolumn{1}{l}{Purpose}\\
- \hline 
-$0<$nbump$<3$ & remove variable stars and stars with no transient\\
-bumplen$\geq 4$ & level 1 trigger (significant bump)\\
-bumplen$\geq 5$ & remove short duration flare events\\
-lag1autocorr$>0.7$ & remove obvious variable stars\\
-bumpvar$>\frac{1}{2}5.5$ (leftedgevar+rightedgevar) & signal to noise cut when reported errors are non-Gaussian\\
 chi2in/chi2out$<4$ & remove events where $\chi^2_\mathrm{dof}$ under peak is much worse than $\chi^2_\mathrm{dof}$ outside peak area\\
  \hline 
+% \hline 
+%   \multicolumn{1}{l}{Statistic ($*$)}&\multicolumn{1}{l}{Definition}\\
+% \hline 
+%$\langle f\rangle$ & average of $f_i$ over all good measurements in lightcurve\\
+%bump & sequence of 4 or more contiguous fluxes with $A_i-1 \geq 3\sigma$\\
+%nbump & number of bumps in lightcurve\\
+%bumplen & number of contiguous flares with $A_i-1 \geq 3\sigma$\\
+%laglautocorr & $\frac{1}{N}\Sigma^{i=N}_{i=1}[(A_i-1)(A_{i+1}-1)]$, correlation between two fluxes\\
+%bumpvar & $\Sigma [A_i-1]\sigma_i$, over points under bump\\
+%leftedgevar & $\Sigma [A_i-1]\sigma_i$, over 2 bumplen points starting 6 bumplen before bump\\
+%rightedgevar & $\Sigma [A_i-1]\sigma_i$, over 2 bumplen points starting 4 bumplen after bump\\
+%chi2in &  $\chi^2$ of microlensing fit for points with time, $t_i$ such that $t_0-1.5\hat t <t_i <t_0+1.5\hat t$ (event duration time)\\
+%chi2out &  $\chi^2$ of microlensing fit for points with time, $t_i$ such that $t_0-6\hat t <t_i <t_0+6\hat t$, but not in chi2in\\
+% \hline 
+% \hline 
+%   \multicolumn{1}{l}{Selection Criterion ($*$)}&\multicolumn{1}{l}{Purpose}\\
+% \hline 
+%$0<$nbump$<3$ & remove variable stars and stars with no transient\\
+%bumplen$\geq 4$ & level 1 trigger (significant bump)\\
+%bumplen$\geq 5$ & remove short duration flare events\\
+%lag1autocorr$>0.7$ & remove obvious variable stars\\
+%bumpvar$>\frac{1}{2}5.5$ (leftedgevar+rightedgevar) & signal to noise cut when reported errors are non-Gaussian\\
+%chi2in/chi2out$<4$ & remove events where $\chi^2_\mathrm{dof}$ under peak is much worse than $\chi^2_\mathrm{dof}$ outside peak area\\
+% \hline 
    \label{table:counta}
   	\end{tabular}
 	%\hspace{1 em}
 	%\begin{tablenotes}
 	%   \item {
-         \tablecomments{\small ($*$) is only applied to Kepler's data }
+         \tablecomments{\small ($*$) is only applied to HSC data }
 	%\end{tablenotes}
 	   \end{center}
    \end{table*}
 %
 
-\subsection{Background}
-\subsubsection{Foreground Moving Objects in the M31 field}%-3
-events which passed selection criteria:comets
-
+%\subsection{Background}
+%\subsubsection{Foreground Moving Objects in the M31 field}%-3
+%events which passed selection criteria:comets
 %\subsection{How many events?}summary
 
 
@@ -1074,7 +1265,7 @@ which prevent the statistical study of the stars. }}
 %comments end
 
 
-\subsection{equations of expected number of event detection} %(this sectioncan be moved to front)
+\subsection{Equations of expected number of event detection} %(this sectioncan be moved to front)
 %\end{itemize}
 %\section{Detectable parameters-2}
 %Also of interest..
@@ -1117,11 +1308,62 @@ We can calculate the expected number of events as in the Table (TBD). %left pane
 
 
 
-\section{Limits on PBH Dark Matter and Discussion-3}
+\section{Limits on PBH Dark Matter and Discussion}
 %\section{Implications}
 %comparison with other data?
 \subsection{Errors in Present Analysis}
-The number of stars in the field..?
+
+\begin{comment}
+まずハローモデル。
+M31とMWのハローモデルとして、別のモデルを使ってみた場合の不定性。
+\end{comment}
+
+There exists some freedom in estimating the theoretical quantity of 
+dark matter in the Milky Way halo and M31 halo. 
+
+Another component which affects our estimation is 
+the number of source stars in the M31 field. 
+Currently we take the number of peaks detected by HSC pipeline as the 
+number of stars in the field. 
+One unique characteristic of this peak statics is that 
+the number of peaks fainter than 24 magnitude drastically decreases and 
+no stars fainter than 25 magnitude are taken into account, which is 
+inadequate because stars around 26 magnitudes are sensitive 
+in our variable-star detection on difference images. 
+For proper estimation of the number of stars in the field, 
+we make use of the photometry catalog of the PHAT project taken by Hubble Space Telescope (HST). 
+We choose a few hundred stars that are in good match of WCS positions with 
+HSC data, where we consider that stars in accuracy of 0.00003 in RA / DEC are the same stars. 
+For these stars we derive the corrected $m_r\mathrm{[HSC]}$ magnitude 
+by the relations of $m_g'$[HST]$-m_i$[HST] and $m_r$[HSC]$-m_g'$[HST]. 
+The best-fit relations derived from the best-fit linear or parabola are as follows: %with huge error bars
+%
+\begin{eqnarray}
+m_r\mathrm{[HSC]}=m_{g'}&-&0.552\times(m_{g'}-m_i)+0.1953\\
+m_r\mathrm{[HSC]}=m_{g'}&-&0.02387\times(m_{g'}-m_i)^2\nonumber\\
+&-&0.384853\times(m_{g'}-m_i)-0.0815
+\end{eqnarray}
+%
+where g'-band and i-band filters correspond to f475W and f814W of HST respectively. 
+The number density count of corrected r-band magnitude $m_r\mathrm{[HSC]}$ 
+is in good agreement with that derived from HSC r-band peak statics for 
+stars in 18 to 22 magnitudes. 
+Even though this relation is mainly certified to be valid in the disk region of M31, 
+we adopted the same relation for every patch region by 
+normalizing the relation of the number density count for stars in 18 to 22 magnitudes. 
+%Thus we adopted HST-corrected number density count for the field by extending up to 26 magnitude. 
+
+Note that we safely assume that all the stars in the field 
+locate at M31, 770kpc away from us 
+because the Galactic latitude of M31 is about 20 degree and 
+separated enough from the disk region of Milky Way galaxy. 
+Also note that we consider that stars fainter than 26 magnitude are negligible 
+because very small contribution from the faint stars would be expected to the total event rate:  
+the number density of these stars is smaller than those between 26 and 25 magnitude, and 
+the detection efficiency is smaller than brighter stars as estimated in \S~\ref{sec:constraint}. 
+
+
+
 %\subsection{Likelihood Analysis and Dark Matter}
 %\subsubsection{Microlensing Rate}
 %\subsubsection{Milky Way and M31 Models}

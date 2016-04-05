@@ -9,45 +9,45 @@ I was expecting a `{' or a `('---line 535 of file refs.bib
  :          Sreekumaretal:98,
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "Capelaetal:13"
-You've used 15 entries,
+You've used 16 entries,
             2988 wiz_defined-function locations,
-            765 strings with 7547 characters,
-and the built_in function-call counts, 6688 in all, are:
-= -- 552
-> -- 450
+            772 strings with 7872 characters,
+and the built_in function-call counts, 7153 in all, are:
+= -- 585
+> -- 487
 < -- 7
-+ -- 149
-- -- 134
-* -- 567
-:= -- 1267
-add.period$ -- 15
-call.type$ -- 15
-change.case$ -- 94
-chr.to.int$ -- 15
-cite$ -- 15
-duplicate$ -- 276
-empty$ -- 407
-format.name$ -- 183
-if$ -- 1318
++ -- 161
+- -- 145
+* -- 615
+:= -- 1357
+add.period$ -- 16
+call.type$ -- 16
+change.case$ -- 99
+chr.to.int$ -- 16
+cite$ -- 16
+duplicate$ -- 294
+empty$ -- 434
+format.name$ -- 198
+if$ -- 1408
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 15
-newline$ -- 49
-num.names$ -- 60
-pop$ -- 96
+missing$ -- 16
+newline$ -- 52
+num.names$ -- 64
+pop$ -- 101
 preamble$ -- 1
-purify$ -- 94
+purify$ -- 99
 quote$ -- 0
-skip$ -- 241
+skip$ -- 256
 stack$ -- 0
-substring$ -- 323
+substring$ -- 344
 swap$ -- 0
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 135
+type$ -- 144
 warning$ -- 0
-while$ -- 55
+while$ -- 57
 width$ -- 0
-write$ -- 153
+write$ -- 163
 (There was 1 error message)

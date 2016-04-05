@@ -1,4 +1,4 @@
-\begin{thebibliography}{15}
+\begin{thebibliography}{16}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Alard} \& {Lupton}(1998)}]{AlardLupton:98}
@@ -22,6 +22,11 @@
   {Yokoyama}}]{Carretal:10}
 {Carr}, B.~J., {Kohri}, K., {Sendouda}, Y., \& {Yokoyama}, J. 2010, \prd, 81,
   104019
+
+\bibitem[{{de Jong} {et~al.}(2006){de Jong}, {Widrow}, {Cseresnjes}, {Kuijken},
+  {Crotts}, {Bergier}, {Baltz}, {Gyuk}, {Sackett}, {Uglesich}, \&
+  {Sutherland}}]{deJongetal:06}
+{de Jong}, J.~T.~A., {et~al.} 2006, \aap, 446, 855
 
 \bibitem[{{Geehan} {et~al.}(2006){Geehan}, {Fardal}, {Babul}, \&
   {Guhathakurta}}]{Geehanetal:06}
