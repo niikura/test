@@ -555,7 +555,18 @@ From these data we searched for microlensing candidates by imposing selection co
 3枚足した画像、差分画像を作成し、2回以上検出されたイベントを変光イベントのcandidateとする。
 ここからマイクロレンズの候補イベントを抽出する。
 
-#ここからまずマイクロレンズでフィッティングする。
+
+#thresholdを超えるピークを含むイベントのみ選ぶ
+まずはじめに、十分大きなピークを含むイベントを選ぶため、
+ノイズのthresholdを設けた。
+thresholdには、シミュレーションのノイズを選んだ。
+このthresholdを3点以上連続で超えたライトカーブを
+ピークを含むイベントと見なした。
+殆どのイベントはこのthresholdを超えていた。
+(efficiencyの計算の時も同様の条件を考慮している。)
+
+
+#次にマイクロレンズでフィッティングする。
 各イベントに対してマイクロレンズのライトカーブでフィッティングする。
 今回は対象としているPBHの質量が小さいので、補正なしの式を用いる。
 イベントレート的に1回程度なので、7時間の観測のライトカーブで一番大きなピークの時刻をピーク時刻とする。
@@ -614,12 +625,36 @@ chi2in chi2outつかうとある程度除ける。
 \end{comment}
 
 
+%#thresholdを超えるピークを含むイベントのみ選ぶ
+%まずはじめに、十分大きなピークを含むイベントを選ぶため、
+%ノイズのthresholdを設けた。
+%thresholdには、シミュレーションのノイズを選んだ。
+%このthresholdを3点以上連続で超えたライトカーブを
+%ピークを含むイベントと見なした。
+%殆どのイベントはこのthresholdを超えていた。
+%(efficiencyの計算の時も同様の条件を考慮している。)
+
+
 %
 \begin{itemize}
 %
+\item{Noise threshold}\\
+Our requirement of microlensing event is to contain 
+a significant bump in the light curve. 
+Therefore we impose a noise threshold on the lightcurves 
+so as to select events with significant bumps. 
+The threshold is derived from the variance of flux 
+of difference images, measured at 1,000 random points. 
+We require the secure events to have large enough bumps 
+with more than 3-consecutive points 
+above the absolute value of noise cut 
+in their lightcurves. 
+
+
+
 \item{Fitting of microlensing shape to lightcurves}\\
-Our 7-hour long data is expected to contain at most 
-one microlensing event from the expectation described in \S~\ref{sec:constraint}. 
+As expected from the microlensing event rate described in \S~\ref{sec:constraint}, 
+the number of microlensing bump expected in our 7-hour long lightcurve would be one at most. 
 Owing to the two-minute cadence of dense data points, 
 application of theoretical shape to lightcurves can work as 
 strong selection criteria of microlensing events. 
@@ -664,6 +699,7 @@ We applied the following selection criteria
 in order to eliminate the probable fake events: 
 
 \begin{itemize}
+%
 \item{Bad data close to CCD edge}\\
 Some remaining candidates are found in the positions close to CCD edges. 
 Every lightcurve for such candidates contains a peak flux when the 
@@ -701,8 +737,8 @@ by our selection criteria if the defects moves slow enough to
 be detected at a fixed position. 
 These events can be removed from the unique feature of sudden magnifications of flux, 
 especially those events with background of negative flux. 
-(not good selection...? or we can also remove them by 
-the unique path of defects similar to the movement of CCD edge during our observation). 
+%(not good selection...?) or we can also remove them by 
+from the unique path of defects similar to the movement of CCD edge during our observation. 
 Note that this selection can also remove the magnification from asteroids, which 
 also causes similar feature of magnification 
 (unlike CCD edges asteroids moves in straight path, though). 
