@@ -15,3 +15,6 @@ The example images show the postage-stamped images around the candidate:
 
 - residual image after subtracting the best-fit PSF image
 
+
+![example](./example.gif)
+
