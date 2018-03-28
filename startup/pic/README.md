@@ -1,18 +1,20 @@
-Variable star at M31
+Example of variable stars at M31
 ====
 
-This page presents one example of flare star at M31 region. 
+This page includes some examples of variable star at M31 region. 
 
 ## Description
 
-postage-stamped images around the candidate: 
+Following folders include examples of: 
 
-- reference image
+- Binary stars
 
-- target image
+- Cepheids
 
-- difference image
+- Exlipsing binary stars (with cadence < 7 hours)
 
-- residual image after subtracting the best-fit PSF image 
+- Flare stars
+
+- candidates of RR-Lyrae type stars
 
 
