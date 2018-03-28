@@ -1,11 +1,11 @@
-Variable star at M31
+Binary star at M31
 ====
 
-This page presents one example of flare star at M31 region.
+This page gives one example of binary system at M31 region.
 
-## Description
+## Description of the image
 
-postage-stamped images around the candidate:
+This image show the postage-stamped images around the candidate:
 
 - reference image
 
